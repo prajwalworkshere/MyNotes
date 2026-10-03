@@ -1,7 +1,4 @@
-### Step-by-step execution
-
-For preorder, the order is:
-
+# PreOrder
 ```text
 ROOT → LEFT → RIGHT
 ```

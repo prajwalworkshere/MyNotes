@@ -1,9 +1,26 @@
-# PreOrder
+# Preorder
+
 ```text
-ROOT → LEFT → RIGHT
+          50
+         /  \
+       40    60
+      /  \     \
+    30   45     80
 ```
 
-The important difference from inorder is that **we print the node BEFORE going to its left child**.
+Preorder code:
+
+```java
+static void preorder(Node n) {
+    if (n == null) return;
+
+    System.out.print(n.data + " ");  // ① PRINT
+    preorder(n.left);                // ② LEFT
+    preorder(n.right);               // ③ RIGHT
+}
+```
+
+### Step-by-step execution
 
 We first call:
 
@@ -11,15 +28,9 @@ We first call:
 preorder(50);
 ```
 
-At `50`, we check:
+Unlike inorder, **preorder prints the node immediately** before going to the left.
 
-```java
-if (50 == null)
-```
-
-It is not null.
-
-So the next line executes immediately:
+So at `50`:
 
 ```java
 System.out.print(50);
@@ -31,43 +42,49 @@ Output:
 50
 ```
 
-Then:
+Then it executes:
 
 ```java
 preorder(50.left);
 ```
 
-`50.left` is `40`, so we go to `40`.
+So we go to `40`.
 
 ---
 
 ### At 40
 
-We check whether `40` is null.
+The first thing preorder does is print `40`:
 
-It isn't.
+```java
+System.out.print(40);
+```
 
-So we immediately print `40`:
+Output:
 
 ```text
 50 40
 ```
 
-Then:
+Then it goes to the left:
 
 ```java
 preorder(40.left);
 ```
 
-`40.left` is `30`, so we go to `30`.
+So we go to `30`.
 
 ---
 
 ### At 30
 
-Again, `30` is not null.
+Again, the first thing it does is print `30`:
 
-So we immediately print `30`:
+```java
+System.out.print(30);
+```
+
+Output:
 
 ```text
 50 40 30
@@ -87,15 +104,202 @@ So:
 if (n == null) return;
 ```
 
-The function returns to the `30` function.
+The function returns to `30`.
 
-Now `30` continues from where it was waiting.
-
-It executes:
+Now it executes:
 
 ```java
+preorder(30.right);
 ```
 
+`30.right` is also `null`.
+
+So it returns again.
+
+Now `30` is completely finished.
+
+We return to `40`.
+
+---
+
+### Back to 40
+
+Remember, `40` had already been printed.
+
+It was waiting at:
+
+```java
+preorder(40.left);
+```
+
+That call is now completely finished.
+
+So the next statement is:
+
+```java
+preorder(40.right);
+```
+
+`40.right` is `45`.
+
+So we go to `45`.
+
+---
+
+### At 45
+
+The first thing preorder does is print `45`:
+
+```java
+System.out.print(45);
+```
+
+Output:
+
+```text
+50 40 30 45
+```
+
+Then:
+
+```java
+preorder(45.left);
+```
+
+`45.left` is `null`, so it returns.
+
+Then:
+
+```java
+preorder(45.right);
+```
+
+`45.right` is also `null`, so it returns.
+
+Now `45` is completely finished.
+
+So we return to `40`.
+
+---
+
+### Back to 40
+
+Both of `40`'s children have now been processed:
+
+```text
+40.left  → 30 → finished
+40.right → 45 → finished
+```
+
+Therefore, `40` is completely finished.
+
+We return to `50`.
+
+---
+
+### Back to 50
+
+Remember, `50` was already printed at the very beginning.
+
+Now its left side is finished:
+
+```text
+50.left → 40 → finished
+```
+
+So the next statement is:
+
+```java
+preorder(50.right);
+```
+
+`50.right` is `60`.
+
+So we go to `60`.
+
+---
+
+### At 60
+
+First thing preorder does:
+
+```java
+System.out.print(60);
+```
+
+Output:
+
+```text
+50 40 30 45 60
+```
+
+Then:
+
+```java
+preorder(60.left);
+```
+
+`60.left` is `null`, so it returns.
+
+Then:
+
+```java
+preorder(60.right);
+```
+
+`60.right` is `80`.
+
+So we go to `80`.
+
+---
+
+### At 80
+
+First thing preorder does is print `80`:
+
+```java
+System.out.print(80);
+```
+
+Final output:
+
+```text
+50 40 30 45 60 80
+```
+
+Then:
+
+```java
+preorder(80.left);
+```
+
+`80.left` is `null` → return.
+
+Then:
+
+```java
+preorder(80.right);
+```
+
+`80.right` is `null` → return.
+
+Now `80` is finished.
+
+We return to `60`.
+
+`60` is finished.
+
+We return to `50`.
+
+`50` is finished.
+
+The entire traversal is complete.
+
+### Final preorder output
+
+```text
+50 40 30 45 60 80
+```
 
 
 # Inorder        

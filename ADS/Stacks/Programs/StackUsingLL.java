@@ -59,6 +59,11 @@ class Stack {
     }
 }
 
+// if current.next!=null is taken as condition then for the last node the loop get breaks 
+// as for the last element the current.next will be null 
+// so we will not able to print the last element of the stacked linked list
+// Error:- 50 40 30 20 10 Exception in thread "main" java.lang.NullPointerException: Cannot read field "data" because "this.top" is null you will get 
+
 public class StackUsingLL {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

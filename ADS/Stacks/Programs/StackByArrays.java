@@ -1,16 +1,19 @@
 import java.util.*;
-
+// class for our stack which have 1) Array of fixed size 2) top for pointing and operation purpose 3) capacity to set the size of array so we can initialize that
 class Stack {
     int array[];
     int top;
     int capacity;
-
+//  Set size of array and declare top as -1 amd capacity as size of our stack/ array;
     Stack(int size) {
         array = new int[size];
         top = -1;
         capacity = size;
     }
-
+/*
+    1. check overflow condition
+    2. increment top nd push the data to array[top] as top = -1 in start
+*/
     public void push(int data) {
         if (top == capacity - 1) {
             System.out.println("Stack Overflow (Stack is Full)");

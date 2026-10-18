@@ -12,3 +12,25 @@ BEGIN
     RETURN FinalPrice ;
 END //
 DELIMITER ;
+
+
+-- USE WITH SELECT STATEMENT
+
+SELECT calculate_discounted_total(2, 500.00, 10.00)
+AS final_amount;
+
+-- Use the function with your table
+
+SELECT
+    order_item_id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    discount_percent,
+    calculate_discounted_total(
+        quantity,
+        unit_price,
+        discount_percent
+    ) AS final_amount
+FROM order_items;

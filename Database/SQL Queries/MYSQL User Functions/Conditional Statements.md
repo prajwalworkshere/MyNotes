@@ -1,10 +1,8 @@
-# MySQL Conditional Statements — Complete Guide with Stored Functions (UDF) and Stored Procedures
+# MySQL Conditional Statements — Complete Guide with Stored Functions and Stored Procedures
 
 MySQL supports conditional statements such as `IF`, `IF...ELSE`, `IF...ELSEIF`, and `CASE`, along with conditional functions such as `IF()`, `IFNULL()`, `NULLIF()`, and `COALESCE()`.
 
-Below, each topic includes its syntax, a stored procedure example, a stored function example, and its use case.
-
-Important terminology: A function created with `CREATE FUNCTION` in SQL is called a stored function. A native MySQL UDF is written in C/C++ and loaded into MySQL. The examples below use stored functions, which is likely what you mean by UDF.
+The examples below include syntax, use cases, stored procedures, stored functions, and execution examples.
 
 ## 1. `IF...THEN` statement
 
@@ -12,9 +10,7 @@ Use case: Execute code only when a condition is true.
 
 Syntax:
 
-SQL
-
-```
+```python
 IF condition THEN
     statements;
 END IF;
@@ -22,9 +18,7 @@ END IF;
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE check_age(IN p_age INT)
@@ -39,17 +33,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL check_age(20);
 ```
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION check_age_fn(p_age INT)
@@ -68,9 +58,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT check_age_fn(20);
 ```
 
@@ -82,9 +70,7 @@ Use case: Choose between two outcomes.
 
 Syntax:
 
-SQL
-
-```
+```python
 IF condition THEN
     statements_if_true;
 ELSE
@@ -94,9 +80,7 @@ END IF;
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE check_number(IN p_num INT)
@@ -113,17 +97,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL check_number(-5);
 ```
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION check_number_fn(p_num INT)
@@ -142,9 +122,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT check_number_fn(-5);
 ```
 
@@ -156,9 +134,7 @@ Use case: Check multiple conditions in order.
 
 Syntax:
 
-SQL
-
-```
+```python
 IF condition1 THEN
     statements1;
 ELSEIF condition2 THEN
@@ -170,9 +146,7 @@ END IF;
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE get_grade(IN p_marks INT)
@@ -193,9 +167,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL get_grade(80);
 ```
 
@@ -203,9 +175,7 @@ Output: `Grade B`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION get_grade_fn(p_marks INT)
@@ -228,9 +198,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT get_grade_fn(80);
 ```
 
@@ -246,9 +214,7 @@ Use case: Match one expression against specific values.
 
 Syntax:
 
-SQL
-
-```
+```python
 CASE expression
     WHEN value1 THEN
         statements1;
@@ -261,9 +227,7 @@ END CASE;
 
 #### Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE get_day(IN p_day INT)
@@ -281,17 +245,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL get_day(2);
 ```
 
 #### Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION get_day_fn(p_day INT)
@@ -311,9 +271,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT get_day_fn(2);
 ```
 
@@ -325,9 +283,7 @@ Use case: Evaluate multiple Boolean conditions.
 
 Syntax:
 
-SQL
-
-```
+```python
 CASE
     WHEN condition1 THEN
         statements1;
@@ -340,9 +296,7 @@ END CASE;
 
 #### Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE check_salary(IN p_salary DECIMAL(10,2))
@@ -362,9 +316,7 @@ DELIMITER ;
 
 #### Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION check_salary_fn(p_salary DECIMAL(10,2))
@@ -383,15 +335,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT check_salary_fn(75000);
 ```
 
 Output: `Medium Salary`
 
-Note: In a stored program, a `CASE` statement must have an `END CASE`. If no condition matches and there is no `ELSE`, MySQL raises an error.
+Note: A stored-program `CASE` statement ends with `END CASE`. If no condition matches and there is no `ELSE`, MySQL raises an error.
 
 ## 5. `IF()` function
 
@@ -399,17 +349,13 @@ Use case: Return one value when a condition is true and another when false.
 
 Syntax:
 
-SQL
-
-```
+```python
 IF(condition, value_if_true, value_if_false)
 ```
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE check_pass(
@@ -425,9 +371,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL check_pass(75, @result);
 SELECT @result;
 ```
@@ -436,9 +380,7 @@ Output: `Pass`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION check_pass_fn(p_marks INT)
@@ -451,9 +393,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT check_pass_fn(75);
 ```
 
@@ -461,9 +401,7 @@ Output: `Pass`
 
 ### C. Normal SQL query
 
-SQL
-
-```
+```sql
 SELECT IF(10 > 5, 'Yes', 'No') AS result;
 ```
 
@@ -475,9 +413,7 @@ Use case: Return a value based on multiple conditions in a regular SQL query.
 
 Syntax:
 
-SQL
-
-```
+```python
 CASE
     WHEN condition1 THEN result1
     WHEN condition2 THEN result2
@@ -487,9 +423,7 @@ END
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE calculate_bonus(
@@ -509,9 +443,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL calculate_bonus(75000, @bonus);
 SELECT @bonus;
 ```
@@ -520,9 +452,7 @@ Output: `5000`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION calculate_bonus_fn(p_salary DECIMAL(10,2))
@@ -539,9 +469,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT calculate_bonus_fn(75000);
 ```
 
@@ -549,9 +477,7 @@ Output: `5000.00`
 
 ### C. Normal SQL query
 
-SQL
-
-```
+```sql
 SELECT
     name,
     CASE
@@ -568,17 +494,13 @@ Use case: Replace `NULL` with a default value.
 
 Syntax:
 
-SQL
-
-```
+```python
 IFNULL(expression, replacement_value)
 ```
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE get_commission(
@@ -594,9 +516,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL get_commission(NULL, @result);
 SELECT @result;
 ```
@@ -605,9 +525,7 @@ Output: `0.00`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION get_commission_fn(p_commission DECIMAL(10,2))
@@ -620,9 +538,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT get_commission_fn(NULL);
 ```
 
@@ -634,17 +550,13 @@ Use case: Return `NULL` when two expressions are equal.
 
 Syntax:
 
-SQL
-
-```
+```python
 NULLIF(expression1, expression2)
 ```
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE safe_quantity(
@@ -660,9 +572,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL safe_quantity(0, @result);
 SELECT @result;
 ```
@@ -671,9 +581,7 @@ Output: `NULL`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION safe_quantity_fn(p_qty INT)
@@ -686,9 +594,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT safe_quantity_fn(0);
 ```
 
@@ -696,14 +602,12 @@ Output: `NULL`
 
 ### C. Prevent division by zero
 
-SQL
-
-```
+```sql
 SELECT total_amount / NULLIF(quantity, 0) AS unit_price
 FROM sales;
 ```
 
-When `quantity` is zero, the result is `NULL` instead of a division-by-zero error.
+When `quantity` is zero, the result is `NULL` rather than a division-by-zero result.
 
 ## 9. `COALESCE()`
 
@@ -711,17 +615,13 @@ Use case: Return the first non-`NULL` value from a list.
 
 Syntax:
 
-SQL
-
-```
+```python
 COALESCE(value1, value2, value3, ...)
 ```
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE get_contact(
@@ -742,9 +642,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL get_contact(NULL, '9876543210', @result);
 SELECT @result;
 ```
@@ -753,9 +651,7 @@ Output: `9876543210`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION get_contact_fn(
@@ -775,9 +671,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT get_contact_fn(NULL, '9876543210');
 ```
 
@@ -789,18 +683,14 @@ Use case: Update values based on different conditions.
 
 ### A. Using `IF()`
 
-SQL
-
-```
+```sql
 UPDATE employees
 SET bonus = IF(salary >= 50000, 5000, 1000);
 ```
 
 ### B. Using `CASE`
 
-SQL
-
-```
+```sql
 UPDATE employees
 SET bonus = CASE
     WHEN salary >= 100000 THEN 10000
@@ -811,9 +701,7 @@ END;
 
 ### C. Inside a stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE update_bonus()
@@ -831,38 +719,30 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL update_bonus();
 ```
 
-### D. Inside a stored function?
-
-A stored function cannot perform an `UPDATE` on a regular table in this way. Use a stored procedure for table modifications.
-
-Important: These `UPDATE` examples affect every row unless you add a `WHERE` clause.
+Important: These `UPDATE` statements affect every row unless you add a `WHERE` clause. Stored functions have restrictions on modifying tables; use a stored procedure for ordinary table updates.
 
 ## 11. Conditional filtering with `WHERE`
 
-These operators are used directly in SQL queries, stored functions, and stored procedures.
+These operators work in ordinary SQL queries and within stored-program SQL statements.
 
-| Operator  | Meaning                                | Example                                  |
-| --------- | -------------------------------------- | ---------------------------------------- |
-| `AND`     | Both conditions must be true           | `salary > 30000 AND age > 20`            |
-| `OR`      | At least one condition must be true    | `department = 'IT' OR department = 'HR'` |
-| `NOT`     | Negates a condition                    | `NOT (salary > 50000)`                   |
-| `IN`      | Matches values in a list               | `department IN ('IT', 'HR')`             |
-| `BETWEEN` | Checks an inclusive range              | `salary BETWEEN 30000 AND 80000`         |
-| `IS NULL` | Checks for `NULL`                      | `commission IS NULL`                     |
-| `LIKE`    | Matches a text pattern                 | `name LIKE 'A%'`                         |
-| `EXISTS`  | Checks whether a subquery returns rows | `EXISTS (SELECT 1 ...)`                  |
+| Operator | Meaning | Example |
+| --- | --- | --- |
+| `AND` | Both conditions must be true | `salary > 30000 AND age > 20` |
+| `OR` | At least one condition must be true | `department = 'IT' OR department = 'HR'` |
+| `NOT` | Negates a condition | `NOT (salary > 50000)` |
+| `IN` | Matches values in a list | `department IN ('IT', 'HR')` |
+| `BETWEEN` | Checks an inclusive range | `salary BETWEEN 30000 AND 80000` |
+| `IS NULL` | Checks for `NULL` | `commission IS NULL` |
+| `LIKE` | Matches a text pattern | `name LIKE 'A%'` |
+| `EXISTS` | Checks whether a subquery returns rows | `EXISTS (SELECT 1 ...)` |
 
 ### A. Normal query
 
-SQL
-
-```
+```sql
 SELECT *
 FROM employees
 WHERE department IN ('IT', 'HR')
@@ -871,9 +751,7 @@ WHERE department IN ('IT', 'HR')
 
 ### B. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE get_employees()
@@ -889,19 +767,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL get_employees();
 ```
 
 ### C. Stored function
 
-Stored functions can use conditions to calculate and return values, but they cannot return an arbitrary result set like a procedure. For example:
-
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION is_high_salary(p_salary DECIMAL(10,2))
@@ -914,9 +786,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT is_high_salary(60000);
 ```
 
@@ -928,9 +798,7 @@ Use case: Check whether a related record exists in another table.
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE check_department(IN p_dept_id INT)
@@ -951,17 +819,13 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL check_department(10);
 ```
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION department_exists_fn(p_dept_id INT)
@@ -980,9 +844,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT department_exists_fn(10);
 ```
 
@@ -994,9 +856,7 @@ Use case: Repeat statements while a condition is true.
 
 ### A. Stored procedure
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE PROCEDURE sum_numbers(
@@ -1018,9 +878,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 CALL sum_numbers(5, @total);
 SELECT @total;
 ```
@@ -1029,9 +887,7 @@ Output: `15`
 
 ### B. Stored function
 
-SQL
-
-```
+```sql
 DELIMITER //
 
 CREATE FUNCTION sum_numbers_fn(p_n INT)
@@ -1054,9 +910,7 @@ DELIMITER ;
 
 Execute:
 
-SQL
-
-```
+```sql
 SELECT sum_numbers_fn(5);
 ```
 
@@ -1064,26 +918,22 @@ Output: `15`
 
 ## 14. Quick comparison: stored function vs. procedure
 
-| Feature                        | Stored function             | Stored procedure                                    |
-| ------------------------------ | --------------------------- | --------------------------------------------------- |
-| Create using                   | `CREATE FUNCTION`           | `CREATE PROCEDURE`                                  |
-| Execute using                  | `SELECT function_name(...)` | `CALL procedure_name(...)`                          |
-| Return value                   | `RETURN value`              | `OUT` parameter or result set                       |
-| `IF...ELSE`                    | Yes                         | Yes                                                 |
-| `CASE` statement               | Yes                         | Yes                                                 |
-| `IF()` and `CASE` expressions  | Yes                         | Yes                                                 |
-| `IFNULL`, `NULLIF`, `COALESCE` | Yes                         | Yes                                                 |
-| `WHILE` loop                   | Yes                         | Yes                                                 |
-| Modify regular table data      | Restricted                  | Yes, subject to permissions and normal restrictions |
+| Feature | Stored function | Stored procedure |
+| --- | --- | --- |
+| Create using | `CREATE FUNCTION` | `CREATE PROCEDURE` |
+| Execute using | `SELECT function_name(...)` | `CALL procedure_name(...)` |
+| Return value | `RETURN value` | `OUT` parameter or result set |
+| `IF...ELSE` | Yes | Yes |
+| `CASE` statement | Yes | Yes |
+| `IF()` and `CASE` expressions | Yes | Yes |
+| `IFNULL`, `NULLIF`, `COALESCE` | Yes | Yes |
+| `WHILE` loop | Yes | Yes |
+| Modify regular table data | Restricted | Yes, subject to permissions and restrictions |
 
 ## Final rules to remember
 
 1. Stored function: Use `RETURN` to return a calculated value.
-
 2. Stored procedure: Use `OUT` parameters to return values or `SELECT` to return a result set.
-
 3. Normal SQL query: Use `IF()` or a `CASE` expression rather than a procedural `IF...THEN` block.
-
 4. Stored function restrictions: Functions have restrictions on statements they can execute, including table modifications and result-set generation.
-
-5. Native UDF: A C/C++ MySQL UDF has a different implementation model from a stored function created with SQL.
+5. Native UDF: A C/C++ MySQL UDF is different from a stored function created using SQL.

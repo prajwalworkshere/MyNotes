@@ -1,3 +1,4 @@
+# SQL NUMERIC FUNCTIONS — COMPLETE A TO Z NOTES
 **MySQL 8.0+ | Theory + Syntax + Examples + Outputs + Practice Questions**
 
 ## TABLE OF CONTENTS

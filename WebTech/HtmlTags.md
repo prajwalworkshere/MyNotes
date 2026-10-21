@@ -548,7 +548,84 @@ Normal elements generally have opening and closing tags.
 
 This example combines headings, paragraphs, links, lists, tables, forms, and semantic elements into one webpage.
 
-```
+```html
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+</head>
+<body>
+
+    <header>
+        <h1>Student Portal</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#courses">Courses</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Welcome to our student portal.</p>
+            <img src="student.jpg" alt="Student studying" width="150">
+        </section>
+
+        <section id="courses">
+            <h2>Available Courses</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+
+            <table border="1">
+                <tr>
+                    <th>Course</th>
+                    <th>Duration</th>
+                </tr>
+                <tr>
+                    <td>HTML</td>
+                    <td>2 Weeks</td>
+                </tr>
+                <tr>
+                    <td>CSS</td>
+                    <td>3 Weeks</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <br><br>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright 2026 Student Portal</p>
+    </footer>
+
+</body>
+</html>
+
 ```
 
 ## 15. Quick revision for viva
